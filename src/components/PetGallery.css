@@ -1,0 +1,106 @@
+.pet-gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gallery-header h2 {
+  color: white;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* No pets found styles */
+.no-pets-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.no-pets-message {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.no-pets-message h3 {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.no-pets-message p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pet-gallery {
+    padding: 0 1rem 1rem;
+  }
+  
+  .gallery-header h2 {
+    font-size: 1.5rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .pets-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .no-pets-container {
+    padding: 1rem;
+    min-height: 250px;
+  }
+  
+  .no-pets-message {
+    padding: 2rem;
+  }
+  
+  .no-pets-message h3 {
+    font-size: 1.3rem;
+  }
+  
+  .no-pets-message p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pets-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .gallery-header h2 {
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
+  }
+}
