@@ -1,9 +1,14 @@
 import React from 'react';
 import './PetCard.css';
 
-const PetCard = ({ pet }) => {
+const PetCard = ({ pet, onAdopt, isAdopted }) => {
   const handleAdopt = () => {
-    alert(`Thank you for your interest in adopting ${pet.name}! Please contact the adoption center for more information.`);
+    if (isAdopted) {
+      alert(`${pet.name} has already been adopted! Thank you for your interest.`);
+      return;
+    }
+    onAdopt(pet.id);
+    alert(`Congratulations! You've successfully adopted ${pet.name}! 🎉 Please contact the adoption center to complete the process.`);
   };
 
   const getTypeIcon = (type) => {
@@ -35,12 +40,17 @@ const PetCard = ({ pet }) => {
   };
 
   return (
-    <div className="pet-card">
+    <div className={`pet-card ${isAdopted ? 'adopted' : ''}`}>
       <div className="pet-image-container">
         <img src={pet.image} alt={pet.name} className="pet-image" />
         <div className="pet-type-badge">
           {getTypeIcon(pet.type)}
         </div>
+        {isAdopted && (
+          <div className="adopted-badge">
+            ✅ ADOPTED
+          </div>
+        )}
       </div>
       
       <div className="pet-info">
@@ -68,8 +78,8 @@ const PetCard = ({ pet }) => {
       </div>
 
       <div className="pet-actions">
-        <button className="adopt-btn" onClick={handleAdopt}>
-          💕 Adopt Me
+        <button className={`adopt-btn ${isAdopted ? 'adopted' : ''}`} onClick={handleAdopt}>
+          {isAdopted ? '✅ Adopted!' : '💕 Adopt Me'}
         </button>
         <button className="learn-more-btn">
           ℹ️ Learn More

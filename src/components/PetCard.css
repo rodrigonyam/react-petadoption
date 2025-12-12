@@ -15,6 +15,15 @@
   box-shadow: 0 16px 48px rgba(0,0,0,0.15);
 }
 
+.pet-card.adopted {
+  opacity: 0.8;
+  background: #f8f9fa;
+}
+
+.pet-card.adopted:hover {
+  transform: translateY(-4px);
+}
+
 .pet-image-container {
   position: relative;
   height: 250px;
@@ -37,6 +46,7 @@
   top: 15px;
   right: 15px;
   background: rgba(255,255,255,0.9);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   width: 50px;
   height: 50px;
@@ -46,6 +56,20 @@
   justify-content: center;
   font-size: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.adopted-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  z-index: 2;
 }
 
 .pet-info {
@@ -154,11 +178,25 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .adopt-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.adopt-btn.adopted {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  cursor: default;
+}
+
+.adopt-btn.adopted:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
 
 .learn-more-btn {
@@ -172,6 +210,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .learn-more-btn:hover {
@@ -187,24 +229,43 @@
   }
   
   .pet-image-container {
-    height: 200px;
+    height: 220px;
   }
   
   .pet-info {
-    padding: 1rem;
+    padding: 1.25rem;
   }
   
   .pet-name {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   
   .pet-actions {
-    padding: 0 1rem 1rem;
+    padding: 0 1.25rem 1.25rem;
     flex-direction: column;
+    gap: 0.75rem;
   }
   
   .adopt-btn, .learn-more-btn {
     width: 100%;
-    margin-bottom: 0.5rem;
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-info {
+    padding: 1rem;
+  }
+  
+  .pet-actions {
+    padding: 0 1rem 1rem;
+  }
+  
+  .adopt-btn, .learn-more-btn {
+    padding: 16px 20px;
+    font-size: 1rem;
+    min-height: 52px;
   }
 }

@@ -6,12 +6,19 @@ import { petsData } from './data/petsData';
 function App() {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [adoptedPets, setAdoptedPets] = useState(new Set());
+  const [showAdopted, setShowAdopted] = useState(true);
+
+  const handleAdopt = (petId) => {
+    setAdoptedPets(prev => new Set([...prev, petId]));
+  };
 
   const filteredPets = petsData.filter(pet => {
     const matchesFilter = filter === 'all' || pet.type.toLowerCase() === filter.toLowerCase();
     const matchesSearch = pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          pet.breed.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesFilter && matchesSearch;
+    const matchesAdopted = showAdopted || !adoptedPets.has(pet.id);
+    return matchesFilter && matchesSearch && matchesAdopted;
   });
 
   return (
@@ -30,6 +37,20 @@ function App() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
+        </div>
+
+        <div className="adopted-toggle-container">
+          <label className="toggle-label">
+            <input
+              type="checkbox"
+              checked={showAdopted}
+              onChange={(e) => setShowAdopted(e.target.checked)}
+              className="toggle-checkbox"
+            />
+            <span className="toggle-text">
+              {showAdopted ? '✅ Show adopted pets' : '❌ Hide adopted pets'}
+            </span>
+          </label>
         </div>
 
         <div className="filter-buttons">
@@ -138,7 +159,11 @@ function App() {
         </div>
       </div>
 
-      <PetGallery pets={filteredPets} />
+      <PetGallery 
+        pets={filteredPets} 
+        onAdopt={handleAdopt} 
+        adoptedPets={adoptedPets} 
+      />
 
       <footer className="app-footer">
         <p>💝 Every pet deserves a loving home</p>
